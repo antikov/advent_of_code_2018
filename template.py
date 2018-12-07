@@ -1,6 +1,6 @@
 def main():
-    with open("input.txt","r") as fin:
-        for lines in fin:
+    with open("input.txt", "r") as fin:
+        for line in fin:
             pass
 
 if __name__ == "__main__":
