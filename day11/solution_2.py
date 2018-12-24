@@ -19,6 +19,8 @@ assert get_power(101, 153, 71) == 4
 
 def main():
     grid = {}
+    
+    #https://en.wikipedia.org/wiki/Summed-area_table
     grid_sum = defaultdict(int)
     for i in range(1, 301): 
         for j in range(1, 301):
@@ -33,8 +35,8 @@ def main():
                 power = grid_sum[(x0, y0)] + grid_sum[(x1, y1)] - grid_sum[(x0, y1)] - grid_sum[(x1, y0)]
                 if power > max_power:
                     max_power = power
-                    max_xy = (i, j, k)
-    print(max_xy)
+                    max_xyk = (i, j, k)
+    print(max_xyk)
 
 if __name__ == "__main__":
     main()
