@@ -1,4 +1,5 @@
-INPUT = 440231
+INPUT: int = 440231
+
 
 def main():
     recipes = [3, 7]
@@ -13,6 +14,7 @@ def main():
         first = (first + recipes[first] + 1) % len(recipes)
         second = (second + recipes[second] + 1) % len(recipes)
     print("".join([str(digit) for digit in recipes[INPUT:INPUT+10]]))
+
 
 if __name__ == "__main__":
     main()

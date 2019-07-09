@@ -11,19 +11,20 @@ BACKSLASH = "\\"
 INTERSECTION = "+"
 
 STATES = {
-    LEFT : STRAIGHT,
-    STRAIGHT : RIGHT,
-    RIGHT : LEFT
+    LEFT: STRAIGHT,
+    STRAIGHT: RIGHT,
+    RIGHT: LEFT
 }
 
-CartDirections = namedtuple('CartDirections',['dx','dy','road', 'left','right','backslash', 'slash'])
+CartDirections = namedtuple('CartDirections', ['dx', 'dy', 'road', 'left', 'right', 'backslash', 'slash'])
 
 DIRECTIONS = {
-    RIGHT : CartDirections(0, 1, STRAIGHT, UP, DOWN, DOWN, UP),
-    LEFT : CartDirections(0, -1, STRAIGHT, DOWN, UP, UP, DOWN),
-    UP : CartDirections(-1, 0, STRAIGHT_VERTICAL, LEFT, RIGHT, LEFT, RIGHT),
-    DOWN : CartDirections(1, 0, STRAIGHT_VERTICAL, RIGHT, LEFT, RIGHT, LEFT)
+    RIGHT: CartDirections(0, 1, STRAIGHT, UP, DOWN, DOWN, UP),
+    LEFT: CartDirections(0, -1, STRAIGHT, DOWN, UP, UP, DOWN),
+    UP: CartDirections(-1, 0, STRAIGHT_VERTICAL, LEFT, RIGHT, LEFT, RIGHT),
+    DOWN: CartDirections(1, 0, STRAIGHT_VERTICAL, RIGHT, LEFT, RIGHT, LEFT)
 }
+
 
 class Cart:
     def __init__(self, x, y, direction):
@@ -38,23 +39,24 @@ class Cart:
 
         state = maze[self.x][self.y]
 
-        if (state == INTERSECTION):
+        if state == INTERSECTION:
             if self.state == LEFT:
                 self.direction = DIRECTIONS[self.direction].left
             elif self.state == RIGHT:
                 self.direction = DIRECTIONS[self.direction].right
 
             self.state = STATES[self.state]
-        elif (state == SLASH):
+        elif state == SLASH:
             self.direction = DIRECTIONS[self.direction].slash
-        elif (state == BACKSLASH):
+        elif state == BACKSLASH:
             self.direction = DIRECTIONS[self.direction].backslash
 
     def __lt__(self, other):
         return (self.x < other.x) or (self.x == other.x and self.y < other.y)
 
     def get_coords(self):
-        return (self.y, self.x)
+        return self.y, self.x
+
 
 def main():
     maze = list()
@@ -77,11 +79,12 @@ def main():
             coords.remove(cart.get_coords())
             cart.move(maze)
             current_coordinates = cart.get_coords()
-            if (current_coordinates in coords):
+            if current_coordinates in coords:
                 print('Collision at ', current_coordinates)
                 return
             else:
                 coords.add(current_coordinates)
+
 
 if __name__ == "__main__":
     main()

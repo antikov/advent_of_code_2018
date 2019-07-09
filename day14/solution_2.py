@@ -1,9 +1,11 @@
 # it took ~1 min to get answer
 
-INPUT = "440231"
+INPUT: str = "440231"
 
-def get_last(recipes, offset = 0):
+
+def get_last(recipes, offset=0) -> str:
     return "".join([str(digit) for digit in recipes[-len(INPUT) - offset:-offset]])
+
 
 def main():
     recipes = [3, 7]
@@ -18,6 +20,7 @@ def main():
         first = (first + recipes[first] + 1) % len(recipes)
         second = (second + recipes[second] + 1) % len(recipes)
     print("".join([str(digit) for digit in recipes]).index(INPUT))
+
 
 if __name__ == "__main__":
     main()
